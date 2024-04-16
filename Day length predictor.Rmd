@@ -22,7 +22,7 @@ Our planet earth is spheroidal, and so circles suffice to summarise it in two di
 
 Drawing a circle and the tilted axis of rotation, the points of intersection become the true poles at 9O degrees N and S, respectively. The equator in our schematic is a line that runs perpendicular (at 90 degrees) to axis of rotation, and that is 0 degrees. We also draw a vertical line through the circle. This symbolises the two sides of earth; one half receiving light from the sun, and one half in darkness. From there we can pick a latitude. In the example, it is 60 degrees north.
 
-![Figure 1. How to work out day length using geometry.](geometry.png)
+![How to work out day length using geometry.](geometry.png)
 
 Using a protractor we can find 60 degrees from the origin at the centre of the circle (and equator) and see where it intersects. We then find the equivalent point on the other side of the circle (using either a compass or protractor) and then we connect those two points with a line which again will be parallel to the equator, and perpendicular to the axis of rotation. This gives the path along which 60 degrees north will travel. 
 
@@ -32,7 +32,7 @@ Earth, being a (near enough) sphere, means that the line we've drawn connecting 
 
 Now we can do a bit of trigonometry to find out the proportion of the circle that experiences light and the proportion that experiences dark.
 
-![Figure 2. Trigonometric workings that calculate the lengths of various lines in the geometric figure that give us length of day and night at the summer solsice at 60N.](workings.png)
+![Trigonometric workings that calculate the lengths of various lines in the geometric figure that give us length of day and night at the summer solsice at 60N.](workings.png)
 
 So now we have some equations, we can fit that into code!
 
@@ -46,7 +46,7 @@ d2r <- function(x){x / 180 * pi}
 r2d <- function(x){x * 180 / pi}
 ```
 
-This function is just a coded version of what was worked out on paper in Figure 2.
+This function is just a coded version of what was worked out on paper in the second figure.
 
 ```{r max day length}
 max_day_length <- function(latitude, radius = 5, verbose = T){
@@ -166,7 +166,8 @@ mtext(3, 1, at = x[1], text = "Winter\nsolstice")
 mtext(3, 1, at = x[92], text = "Spring\nequinox")
 mtext(3, 1, at = x[round(366 * 0.5, 0)], text = "Summer\nsolstice")
 mtext(3, 1, at = x[round(366 * 0.75)], text = "Autumn\nequinox")
-text(x[round(inRange(c(1, 366), c(0, 0.25, 0.5, 0.75)), 0)], 18.5, labels = sapply(y[round(inRange(c(1, 366), c(0, 0.25, 0.5, 0.75)), 0)], dh2hm), 
+text(x[round(inRange(c(1, 366), c(0, 0.25, 0.5, 0.75)), 0)], 18.5, 
+     labels = sapply(y[round(inRange(c(1, 366), c(0, 0.25, 0.5, 0.75)), 0)], dh2hm), 
      col = "darkred")
 points(x, y, col = "#00000099")
 
