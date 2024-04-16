@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Abstract
 
-My partner has Seasonal Affective Disorder and the dark days of winter really affect her. To cheer her up I decided to try and show her how, coming out of winter, that the length of the day will increase fairly rapidly through spring settling into the long days of summer.
+My partner has Seasonal Affective Disorder and the dark days of winter really affect her. To cheer her up I decided to try and show her how, coming out of winter, that the length of the day will increase fairly rapidly through spring and then settling into the long days of summer.
 
 I decided that I could do this with a bit of geometry and some code.
 
@@ -85,7 +85,7 @@ min_day <- 24 - max_day
 max_day_length(my_lat, verbose = T)
 ```
 
-At the summer solstice, our model calculates that the day lasts 16.2 hours, and consequently the night (24 - daylight hours) is 7.8 hours. As this is just the extremes at the solstices, we now need to build in the precession of the seasons. Our function gives the maximum and minimum day length, so we just need to interpolate the times in-between. The change in day length is not linear (the change in day length is constant from day to day) but rather the rate changes from near-steady states at the solstices where it doesn't change much, to the equinoxes where change is greatest. We can model this rate of change using a sin wave, like this. First, I'll just define a quick function for finding a proportional value within a range which I use to convert a value of y = sin(x) into a day of the year:
+At the summer solstice, our model calculates that the day lasts 16.2 hours, and consequently the night (24 - daylight hours) is 7.8 hours. As these are just the extremes at the solstices, we now need to build in the precession of the seasons. Our function gives the maximum and minimum day length, so we just need to interpolate the times in-between. The change in day length is not linear (i.e., the change in day length is not constant from day to day) but rather the rate changes from near-steady states at the solstices where it doesn't change much, to the equinoxes where change is greatest. We can model this rate of change using a sin wave. First, I'll just define a quick function for finding a proportional value within a range which I use to convert a value of y = sin(x) into a day of the year:
 
 ```{r inRange function}
 inRange <- function(x, value = 0.5){
@@ -118,7 +118,7 @@ y <- inRange(c(min_day, max_day), y)
 plot(x, y, type = "l")
 ```
 
-So using this sin wave as a basis, we reorder it so line up with solstices. I just need to load a couple more functions, one for converting days/hours values to hours/minutes and a lazy plotting function I use to control the plot margins. I also like axis ticks on the inside, so there's a function for that. Also, loading <b>dplyr</b> so I can use the pipe %>% for easier coding and <b>stringr</b> for string manipulation.
+So using this sin wave as a basis, we reorder it to line up with solstices. I just need to load a couple more functions, one for converting days/hours values to hours/minutes and a lazy plotting function I use to control the plot margins in base R. I also like axis ticks on the inside, so there's a function for that. Also, loading <b>dplyr</b> so I can use the pipe %>% for easier coding and <b>stringr</b> for string manipulation.
 
 ```{r convert days/hours to hours/mins}
 dh2hm <- function(x){
@@ -190,8 +190,10 @@ internal_axis_ticks(2, 2)
 box()
 ```
 
-And there we go, our model predicts that the day length at 50N on 16th April 2024 will be 13 hours, 48 minutes. This can be checked against a weather app or website.
+And there we go, our model predicts that the day length at 50N on 16th April 2024 will be 13 hours, 48 minutes. This can be checked against a weather app or website. It's out by about 5 minutes. Not bad!
 
 ## Conclusion
 
-Whilst not perfect (you might find that checking against an app), it gives a pretty decent approximation of day length for latitude. The shape of the wave should actually vary depending on latitude; the poles experience 100% light or dark at certain times of the year, and there would be no variation at the equator. Hopefully I'll get the time to plug that in at some point.
+Whilst not perfect, it gives a pretty decent approximation of day length for a given latitude and day of the year. 
+
+In terms of improvements, the shape of the wave should actually vary depending on latitude; the poles experience 100% light or dark at certain times of the year (so a sin wive featuring square wave-like maxima and minima), and there would be no variation at the equator. Also, the day length curve is for the northern hemisphere and so a small modification could be made to make it correct for the southern hemisphere too (where seasons are opposite to the north). Hopefully I'll get the time to plug that in at some point.
