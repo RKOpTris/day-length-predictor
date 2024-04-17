@@ -2,7 +2,7 @@
 title: "Day length predictor"
 author: "RKOpTris"
 date: '2024-04-16'
-output: pdf_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
