@@ -1,7 +1,7 @@
 Day length predictor
 ================
 RKOpTris
-2024-04-16
+2024-04-22
 
 ## Abstract
 
@@ -56,9 +56,67 @@ on the side facing away. (Remember this is at the summer solstice.)
 Now we can do a bit of trigonometry to find out the proportion of the
 circle that experiences light and the proportion that experiences dark.
 
-![Trigonometric workings that calculate the lengths of various lines in
-the geometric figure that give us length of day and night at the summer
-solsice at 60N.](workings.png)
+First we need to find the angle
+![\\theta_1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctheta_1 "\theta_1"),
+which is just a case of subtracting our latitude angle
+(![\\theta = 60](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctheta%20%3D%2060 "\theta = 60"))
+subtracted from 90 (degrees):
+
+![\\theta\_{1} = 90 - \\theta](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctheta_%7B1%7D%20%3D%2090%20-%20%5Ctheta "\theta_{1} = 90 - \theta")
+
+And
+![h\_{1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;h_%7B1%7D "h_{1}")
+is just the radius of our circle:
+
+![h\_{1} = r](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;h_%7B1%7D%20%3D%20r "h_{1} = r")
+
+Then we can work out the opposite side of that triangle, which is:
+
+![o\_{1} = r \\cdot sin\\theta\_{1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B1%7D%20%3D%20r%20%5Ccdot%20sin%5Ctheta_%7B1%7D "o_{1} = r \cdot sin\theta_{1}")
+
+The opposite side of this triangle
+(![o\_{1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B1%7D "o_{1}"))
+is the radius of the circle that can be drawn at our chosen latitude. We
+then need the length of the adjacent side
+(![a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a "a"))
+in order to calculate
+![o\_{2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B2%7D "o_{2}"),
+a triangle that
+![a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a "a")
+is also the adjacent side to the angle 23.5 degrees (the axial tilt,
+which we already know).
+
+![a^{2} = {h\_{1}}^{2} - {o\_{1}}^{2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a%5E%7B2%7D%20%3D%20%7Bh_%7B1%7D%7D%5E%7B2%7D%20-%20%7Bo_%7B1%7D%7D%5E%7B2%7D "a^{2} = {h_{1}}^{2} - {o_{1}}^{2}")
+
+Opposite side
+(![o\_{2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B2%7D "o_{2}"))
+is key in calculating the length of day/night as this is the line that
+intersects the vertical day/night line. Any part of the right side of
+the vertical line is in the light, and anything on the left side is in
+darkness.
+
+![o\_{2} = a \\cdot tan23.5](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B2%7D%20%3D%20a%20%5Ccdot%20tan23.5 "o_{2} = a \cdot tan23.5")
+
+We then need to transform
+![o\_{2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B2%7D "o_{2}")
+so that it represents the amount of the circumference of our circle at
+60 degrees that is in light or dark. This is indicated by the line drawn
+parallel to the axis tilt which intersects the day/night vertical line.
+We know
+![o\_{2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B2%7D "o_{2}")
+and
+![o\_{1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;o_%7B1%7D "o_{1}")
+so we can calculate
+![\\theta\_{3}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctheta_%7B3%7D "\theta_{3}"):
+
+![\\theta\_{3} = sin^{-1}\\frac{o\_{2}}{o\_{1}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctheta_%7B3%7D%20%3D%20sin%5E%7B-1%7D%5Cfrac%7Bo_%7B2%7D%7D%7Bo_%7B1%7D%7D "\theta_{3} = sin^{-1}\frac{o_{2}}{o_{1}}")
+
+And then it is just a case of working out how many degrees are in light
+(S), and how many are in dark (D):
+
+![S = 360 - 180 - (2 \\cdot \\theta\_{3})](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S%20%3D%20360%20-%20180%20-%20%282%20%5Ccdot%20%5Ctheta_%7B3%7D%29 "S = 360 - 180 - (2 \cdot \theta_{3})")
+
+![D = 360 - S](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;D%20%3D%20360%20-%20S "D = 360 - S")
 
 So now we have some equations, we can fit that into code!
 
@@ -104,18 +162,18 @@ max_day_length <- function(latitude, radius = 5, verbose = T){
 }
 ```
 
-So let’s try the code! So for a latitude of 50N (or 50S), maximum day
-length is:
+So let’s try the code! So for a latitude of 52.5N (or 52.5S), maximum
+day length is:
 
 ``` r
-my_lat <- 50
+my_lat <- 52.5
 max_day <- max_day_length(my_lat, 5, verbose = F)
 min_day <- 24 - max_day
 max_day_length(my_lat, verbose = T)
 ```
 
-    ## [1] "Max day length: 16.2"
-    ## [1] "Min night length: 7.8"
+    ## [1] "Max day length: 16.6"
+    ## [1] "Min night length: 7.4"
 
 At the summer solstice, our model calculates that the day lasts 16.2
 hours, and consequently the night (24 - daylight hours) is 7.8 hours. As
@@ -255,11 +313,11 @@ internal_axis_ticks(2, 2)
 box()
 ```
 
-![](Day-length-predictor_files/figure-gfm/main%20plot-1.png)<!-- -->
+![](Day-length-predictor_files/figure-gfm/main_plot-1.png)<!-- -->
 
-And there we go, our model predicts that the day length at 50N on 16th
-April 2024 will be 13 hours, 48 minutes. This can be checked against a
-weather app or website. It’s out by about 5 minutes. Not bad!
+And there we go, our model predicts that the day length at 52.5N on 22nd
+April 2024 will be 14 hours, 10 minutes. This can be checked against a
+weather app or website. It’s out by about 3 minutes. Not too bad!
 
 ## Conclusion
 

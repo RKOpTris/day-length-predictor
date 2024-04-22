@@ -1,7 +1,7 @@
 ---
 title: "Day length predictor"
 author: "RKOpTris"
-date: '2024-04-16'
+date: '2024-04-22'
 output: rmarkdown::github_document
 ---
 
@@ -32,7 +32,25 @@ Earth, being a (near enough) sphere, means that the line we've drawn connecting 
 
 Now we can do a bit of trigonometry to find out the proportion of the circle that experiences light and the proportion that experiences dark.
 
-![Trigonometric workings that calculate the lengths of various lines in the geometric figure that give us length of day and night at the summer solsice at 60N.](workings.png)
+First we need to find the angle $\theta_1$, which is just a case of subtracting our latitude angle ($\theta = 60$) subtracted from 90 (degrees):
+$$\theta_{1} = 90 - \theta$$
+And $h_{1}$ is just the radius of our circle:
+$$h_{1} = r$$
+Then we can work out the opposite side of that triangle, which is:
+$$o_{1} = r \cdot sin\theta_{1}$$
+The opposite side of this triangle ($o_{1}$) is the radius of the circle that can be drawn at our chosen latitude. We then need the length of the adjacent side ($a$) in order to calculate $o_{2}$, a triangle that $a$ is also the adjacent side to the angle 23.5 degrees (the axial tilt, which we already know).
+
+$$a^{2} = {h_{1}}^{2} - {o_{1}}^{2}$$
+Opposite side ($o_{2}$) is key in calculating the length of day/night as this is the line that intersects the vertical day/night line. Any part of the right side of the vertical line is in the light, and anything on the left side is in darkness.
+
+$$o_{2} = a \cdot tan23.5$$
+We then need to transform $o_{2}$ so that it represents the amount of the circumference of our circle at 60 degrees that is in light or dark. This is indicated by the line drawn parallel to the axis tilt which intersects the day/night vertical line. We know $o_{2}$ and $o_{1}$ so we can calculate $\theta_{3}$: 
+$$\theta_{3} = sin^{-1}\frac{o_{2}}{o_{1}}$$
+And then it is just a case of working out how many degrees are in light (S), and how many are in dark (D):
+$$S = 360 - 180 - (2 \cdot \theta_{3})$$
+$$D = 360 - S$$
+
+
 
 So now we have some equations, we can fit that into code!
 
@@ -76,10 +94,10 @@ max_day_length <- function(latitude, radius = 5, verbose = T){
 }
 ```
 
-So let's try the code! So for a latitude of 50N (or 50S), maximum day length is:
+So let's try the code! So for a latitude of 52.5N (or 52.5S), maximum day length is:
 
 ```{r trying the code}
-my_lat <- 50
+my_lat <- 52.5
 max_day <- max_day_length(my_lat, 5, verbose = F)
 min_day <- 24 - max_day
 max_day_length(my_lat, verbose = T)
@@ -152,7 +170,7 @@ library(stringr)
 
 And we get this:
 
-```{r main plot}
+```{r, main_plot, fig.width=12, fig.height=9}
 winter_solstice <- which.min(y)
 y <- y[c((winter_solstice + 1):366, 1:winter_solstice)]
 par(pty = "m")
@@ -190,7 +208,7 @@ internal_axis_ticks(2, 2)
 box()
 ```
 
-And there we go, our model predicts that the day length at 50N on 16th April 2024 will be 13 hours, 48 minutes. This can be checked against a weather app or website. It's out by about 5 minutes. Not bad!
+And there we go, our model predicts that the day length at 52.5N on 22nd April 2024 will be 14 hours, 10 minutes. This can be checked against a weather app or website. It's out by about 3 minutes. Not too bad!
 
 ## Conclusion
 
