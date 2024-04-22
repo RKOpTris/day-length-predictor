@@ -47,10 +47,9 @@ $$o_{2} = a \cdot tan23.5$$
 We then need to transform $o_{2}$ so that it represents the amount of the circumference of our circle at 60 degrees that is in light or dark. This is indicated by the line drawn parallel to the axis tilt which intersects the day/night vertical line. We know $o_{2}$ and $o_{1}$ so we can calculate $\theta_{3}$: 
 $$\theta_{3} = sin^{-1}\frac{o_{2}}{o_{1}}$$
 And then it is just a case of working out how many degrees are in light (S), and how many are in dark (D):
-$$S = 360 - 180 - (2 \cdot \theta_{3})$$
+$$S = 180 + (2 \cdot \theta_{3})$$
 $$D = 360 - S$$
-
-
+And with those values in degrees, we only need to divide the 360 degrees of the circle into the 24 hours of the day and that gives us the decimal number of hours of light/dark.
 
 So now we have some equations, we can fit that into code!
 

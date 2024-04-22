@@ -114,9 +114,13 @@ so we can calculate
 And then it is just a case of working out how many degrees are in light
 (S), and how many are in dark (D):
 
-![S = 360 - 180 - (2 \\cdot \\theta\_{3})](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S%20%3D%20360%20-%20180%20-%20%282%20%5Ccdot%20%5Ctheta_%7B3%7D%29 "S = 360 - 180 - (2 \cdot \theta_{3})")
+![S = 180 + (2 \\cdot \\theta\_{3})](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S%20%3D%20180%20%2B%20%282%20%5Ccdot%20%5Ctheta_%7B3%7D%29 "S = 180 + (2 \cdot \theta_{3})")
 
 ![D = 360 - S](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;D%20%3D%20360%20-%20S "D = 360 - S")
+
+And with those values in degrees, we only need to divide the 360 degrees
+of the circle into the 24 hours of the day and that gives us the decimal
+number of hours of light/dark.
 
 So now we have some equations, we can fit that into code!
 
